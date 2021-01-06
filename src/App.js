@@ -1,25 +1,64 @@
-import logo from './logo.svg';
+/* global chrome */
+import React, { Component} from 'react'
 import './App.css';
+import AddUserInterest from './components/AddUserInterest/AddUserInterest';
 
-function App() {
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isSignedIn: false,
+      keyword: '',
+      category: '',
+      region: ''
+    }
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+  }
+
+  // onSearchInput = (event) => {
+  //   this.setState({searchInput: event.target.value});
+  //   console.log(event.target.value);
+  // }
+
+  // onCatSelect = (event) => {
+  //   this.setState({catSelect: event.target.value});
+  //   console.log(event.target.value);
+  // }
+
+  // onRegionSelect = (event) => {
+  //   this.setState({regionSelect: event.target.value});
+  //   console.log(event.target.value);
+  // }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name] : value
+    })
+  }
+
+  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  //   // Use the token.
+  //   console.log(token);
+  //   this.setState({isSignedIn: true});
+    
+  // });
+  
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddUserInterest  onSubmit={this.onSubmit} handleInputChange={this.handleInputChange}/>
     </div>
   );
+  }
 }
 
 export default App;
