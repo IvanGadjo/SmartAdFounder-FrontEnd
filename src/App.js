@@ -2,7 +2,10 @@
 import React, { Component} from 'react'
 import './App.css';
 import AddUserInterest from './components/AddUserInterest/AddUserInterest';
+import SockJsClient from 'react-stomp';
+import ApiService from './service/ApiService';
 
+const SOCKET_URL = 'http://localhost:8080/client'
 
 class App extends Component {
   constructor() {
@@ -11,8 +14,18 @@ class App extends Component {
       isSignedIn: false,
       keyword: '',
       category: '',
-      region: ''
+      region: '',
+      foundAdvert: {}
     }
+  }
+
+  onConnected = () => {
+    console.log("Connected!");
+  }
+
+  onMessageReceived = (msg) => {
+    this.setState({foundAdvert: msg});
+    console.log("Message Received", msg);
   }
 
   onSubmit = (e) => {
@@ -55,7 +68,18 @@ class App extends Component {
   render(){
   return (
     <div className="App">
-      <AddUserInterest  onSubmit={this.onSubmit} handleInputChange={this.handleInputChange}/>
+      <AddUserInterest
+        onSubmit={this.onSubmit} 
+        handleInputChange={this.handleInputChange}
+      />
+      <SockJsClient 
+        url={SOCKET_URL}
+        topics={['/topic/group']}
+        onConnect={this.onConnected} 
+        onDisconnect={console.log("Disconnected")} 
+        onMessage={msg => this.onMessageReceived(msg)}
+        debug={false}
+      />
     </div>
   );
   }
