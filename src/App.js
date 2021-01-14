@@ -1,5 +1,5 @@
 /* global chrome */
-import React, { Component} from 'react'
+import React, { useState, useEffect} from 'react'
 import './App.css';
 import AddUserInterest from './components/AddUserInterest/AddUserInterest';
 import SockJsClient from 'react-stomp';
@@ -7,30 +7,54 @@ import ApiService from './service/ApiService';
 
 const SOCKET_URL = 'http://localhost:8080/client'
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isSignedIn: false,
-      keyword: '',
-      category: '',
-      region: '',
-      foundAdvert: {}
-    }
-  }
+function App() {
 
-  onConnected = () => {
+  // classs App
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     isSignedIn: false,
+  //     keyword: '',
+  //     category: '',
+  //     region: '',
+  //     foundAdvert: {},
+  //     user: {},
+  //     userInterests: []
+  //   }
+  // }
+
+  const [addNew, setAddNew] = useState(false)
+  const [userInterest, setUserInterest] = useState({})
+  const [user, setUser] = useState({})
+  const [foundAd, setFoundAd] = useState({})
+
+  const onConnected = () => {
     console.log("Connected!");
   }
 
-  onMessageReceived = (msg) => {
-    this.setState({foundAdvert: msg});
+  const onMessageReceived = (msg) => {
+    //this.setState({foundAdvert: msg});
+    setFoundAd(msg);
+    setUserInterest({...userInterest, foundAd: [...foundAd, msg]});
     console.log("Message Received", msg);
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
+  const onSubmit = (e) => {
+    
+
+    setAddNew(false);
+  }
+
+  const editInterest = () => {
+
+  }
+
+  const deleteInterest = () => {
+
+  }
+
+  const addInterest = () => {
+      setAddNew(true);
   }
 
   // onSearchInput = (event) => {
@@ -48,41 +72,40 @@ class App extends Component {
   //   console.log(event.target.value);
   // }
 
-  handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    // this.setState({
+    //   [name] : value
+    // })
+    setUserInterest({...userInterest, [name] : value})
+    console.log(userInterest)
 
-    this.setState({
-      [name] : value
-    })
   }
 
   // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
   //   // Use the token.
-  //   console.log(token);
-  //   this.setState({isSignedIn: true});
+    
     
   // });
   
-  render(){
   return (
     <div className="App">
       <AddUserInterest
-        onSubmit={this.onSubmit} 
-        handleInputChange={this.handleInputChange}
+        onSubmit={onSubmit} 
+        handleInputChange={handleInputChange}
       />
-      <SockJsClient 
+      {/* <SockJsClient 
         url={SOCKET_URL}
         topics={['/topic/group']}
-        onConnect={this.onConnected} 
+        onConnect={onConnected} 
         onDisconnect={console.log("Disconnected")} 
-        onMessage={msg => this.onMessageReceived(msg)}
+        onMessage={msg => onMessageReceived(msg)}
         debug={false}
-      />
+      /> */}
     </div>
   );
-  }
 }
 
 export default App;

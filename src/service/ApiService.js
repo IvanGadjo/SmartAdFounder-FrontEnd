@@ -3,13 +3,13 @@ import Axios from 'axios';
 
 const ApiService = () => {
 
-    getUserInterests = (userId) => {
+    const getUserInterests = (userId) => {
         Axios.get(`localhost:8080/api/userInterests/all/byUser/${userId}`)
         .then(res => res.data())
         .catch(err => console.log(err));
     }
 
-    createUser = (user) => {
+    const createUser = (user) => {
         Axios.post("localhost:8080/api/users/createUser", {
              body: user
         })
@@ -17,7 +17,7 @@ const ApiService = () => {
         .catch(err => console.log(err));
     }
 
-    createUserInterest = (userInterest, userId) => {
+    const createUserInterest = (userInterest, userId) => {
         Axios.post("localhost:8080/api/userInterests/createUserInterest", {
             body: {userInterest, userId}
         })
@@ -25,7 +25,7 @@ const ApiService = () => {
         .catch(err => console.log(err));
     }
 
-    editUserInterests = (newUserInterest, userId) => {
+    const editUserInterests = (newUserInterest, userId) => {
         Axios.patch("localhost:8080/api/userInterests/editUserInterest", {
             body: {newUserInterest, userId}
         })
