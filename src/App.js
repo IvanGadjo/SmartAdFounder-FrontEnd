@@ -4,6 +4,7 @@ import './App.css';
 import AddUserInterest from './components/AddUserInterest/AddUserInterest';
 import SockJsClient from 'react-stomp';
 import ApiService from './service/ApiService';
+import mockUser from './data/MockUser';
 
 const SOCKET_URL = 'http://localhost:8080/client'
 
@@ -25,7 +26,7 @@ function App() {
 
   const [addNew, setAddNew] = useState(false)
   const [userInterest, setUserInterest] = useState({})
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
 
   const onConnected = () => {
@@ -41,16 +42,23 @@ function App() {
 
   const onSubmit = (e) => {
     
-
+    // ovde treba da se submitne nov userInterest
+    // da se dodade vo listata i da se prenasoci 
+    // userot na ManageInterest komponentata
+    // treba da se prati do bazata deka userot
+    // dobil nov interest
+    // axios createUserInterest
     setAddNew(false);
   }
 
+  
   const editInterest = () => {
-
+    // axios editUserInterest
   }
 
   const deleteInterest = () => {
-
+    // axios editUserInterest
+    // active: false prakjam kako argument
   }
 
   const addInterest = () => {
