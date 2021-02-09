@@ -20,9 +20,9 @@ const ManageInterests = ({editInterest, deleteInterest, addInterest, user}) => {
                 <dt className="dib b">Ads:</dt>
                 <dd className="dib ml0 gray">{int.foundAd}</dd>
             </dl>
-            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" href="#0">Add</a>
-            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" href="#0">Edit</a>
-            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" href="#0">Delete</a>
+            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" onClick={addInterest} href="#">Add</a>
+            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" href="#">Edit</a>
+            <a className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" href="#">Delete</a>
         </div>
         )}
         </div>

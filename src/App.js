@@ -24,8 +24,8 @@ function App() {
   const onMessageReceived = (msg) => {
     setFoundAd(msg);
     user.userInterests.map(userInt => {
-       if(foundAd.id === userInt.id) {
-       setUser({...user, userInterests: userInt.foundAdverts.push(msg)}) 
+       if(foundAd.id === userInt.id) { 
+       //setUser({...user, userInterests: userInt.foundAdverts.push(msg)}) 
       }}
       );
     console.log("Message Received", msg);
@@ -33,9 +33,13 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // setAddNew(false);
-    // setUser({...user, userInterests: userInterests.push(userInterest)})
-    // ApiService.createUserInterest(userInterest, user.id);
+    setAddNew(false);
+    //setUser({...user, userInterests: ['m' , 'd']})
+    let user2 = {...user};
+    user2.userInterests.push(userInterest);
+    setUser(user2);
+    console.log(user)
+    ApiService.createUserInterest(userInterest, user.id);
   }
 
   
@@ -63,19 +67,19 @@ function App() {
 
   }
 
-  chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    // Use the token.
-    // console.log('Jas sum!')
-    // console.log(token);
+  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  //   // Use the token.
+  //   // console.log('Jas sum!')
+  //   // console.log(token);
     
-  });
+  // });
 
-  chrome.identity.getProfileUserInfo((userInfo) => {
-    console.log('User Info: ');
-    console.log(userInfo)
+  // chrome.identity.getProfileUserInfo((userInfo) => {
+  //   console.log('User Info: ');
+  //   console.log(userInfo)
 
 
-});
+//});
   
   return (
     <div className="App">
