@@ -3,36 +3,44 @@ export const mockUser = {
     Surname: 'Smith',
     UserInterest: [
         {
-            keyword: 'Opel',
+            id: 1,
+            keywords: 'Opel',
             category: 'Cars',
             region: 'Skopje',
-            foundAdvert: 'url goes here'
+            foundAd: 'url goes here',
+            active: true,
         },
         {
-            keyword: 'Iphone 6',
+            id: 2,
+            keywords: 'Iphone 6',
             category: 'Mobile Phones',
             region: 'All',
-            foundAdvert: 'url goes here'
+            foundAd: 'url goes here',
+            active: true
         },
         {
-            keyword: 'Casio',
+            id: 3,
+            keywords: 'Casio',
             category: 'Watch',
             region: 'Prilep',
-            foundAdvert: 'url goes here'
+            foundAd: 'url goes here',
+            active: true
         },
         {
-            keyword: 'Bmw X5',
+            id: 4,
+            keywords: 'Bmw X5',
             category: 'Cars',
             region: 'Kumanovo',
-            foundAdvert: 'url goes here'
+            foundAd: 'url goes here',
+            active: true
         },
         {
-            keyword: 'Burton board',
+            id: 5,
+            keywords: 'Burton board',
             category: 'Winter',
             region: 'Mavrovo',
-            foundAdvert: 'url goes here'
+            foundAd: 'url goes here',
+            active: true
         }
     ]
-
-
 }

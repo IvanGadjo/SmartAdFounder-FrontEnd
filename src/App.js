@@ -4,25 +4,12 @@ import './App.css';
 import AddUserInterest from './components/AddUserInterest/AddUserInterest';
 import SockJsClient from 'react-stomp';
 import ApiService from './service/ApiService';
-import mockUser from './data/MockUser';
+import {mockUser} from './data/MockUser';
+import ManageInterests from './components/ManageInterests/ManageInterests';
 
 const SOCKET_URL = 'http://localhost:8080/client'
 
 function App() {
-
-  // classs App
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     isSignedIn: false,
-  //     keyword: '',
-  //     category: '',
-  //     region: '',
-  //     foundAdvert: {},
-  //     user: {},
-  //     userInterests: []
-  //   }
-  // }
 
   const [addNew, setAddNew] = useState(false)
   const [userInterest, setUserInterest] = useState({})
@@ -36,7 +23,7 @@ function App() {
   const onMessageReceived = (msg) => {
     //this.setState({foundAdvert: msg});
     setFoundAd(msg);
-    setUserInterest({...userInterest, foundAd: [...foundAd, msg]});
+    setUserInterest({...userInterest, foundAdverts: push(msg)});
     console.log("Message Received", msg);
   }
 
@@ -100,9 +87,16 @@ function App() {
   
   return (
     <div className="App">
+      (addNew) ?
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}
+      /> :
+      <ManageInterests
+        editInterest={editInterest}
+        deleteInterest={deleteInterest}
+        addNew = {addNew}
+        user = {user}
       />
       {/* <SockJsClient 
         url={SOCKET_URL}
