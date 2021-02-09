@@ -17,11 +17,16 @@
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyh0Ez4C4EuMGGKKDLjWbv3m1yLzqLM0EZNlK/bG16FMjC71hnP+zX1QUv58FpDid+GlGwF6J8StKqhgBddMEBwfKf+WmSWn4fmSRK6ZHK7aG0LQ/1Hml8X7BIIiNuOBwkB818Za5R8SFCeGiepvEuOhA7dA978R7bavQ6WjxWBqYBFsB8+IpCyy9N1KViikjdHBHUCIUBwg3ix8FKIKJwA/B9n5rrqHiRvpkQFZWvBhjfs6/ml02e64j7VJ0E9Pe+LQ1Q97xfE+C2deTunwM9ej7AwuklwGp/MkkSLFMe1ScmoMUOSYEe8zcANQP6N1DKPOaWZAY+4N5RPSg00rnEwIDAQAB",
   "permissions": [
     "identity",
+    "identity.email",
+    "https://www.googleapis.com/*",
+    "https://*.googleusercontent.com/*",
     "<all_urls>"
   ],
   "oauth2": {
     "client_id": "850083248275-ep86vovcdk9if3e9q8i6666lafcdq82q.apps.googleusercontent.com",
     "scopes": [
+      "email",
+      "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/drive"
     ]
   }

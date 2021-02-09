@@ -67,11 +67,19 @@ function App() {
 
   }
 
-  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-  //   // Use the token.
+  chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    // Use the token.
+    // console.log('Jas sum!')
+    // console.log(token);
     
-    
-  // });
+  });
+
+  chrome.identity.getProfileUserInfo((userInfo) => {
+    console.log('User Info: ');
+    console.log(userInfo)
+
+
+});
   
   return (
     <div className="App">
