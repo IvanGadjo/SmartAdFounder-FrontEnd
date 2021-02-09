@@ -40,4 +40,6 @@
   
   .box select option {
     padding: 30px;
+    /* position: absolute; */
+    /* bottom: 100%; */
   }

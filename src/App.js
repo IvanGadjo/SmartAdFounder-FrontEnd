@@ -4,7 +4,7 @@ import './App.css';
 import AddUserInterest from './components/AddUserInterest/AddUserInterest';
 import SockJsClient from 'react-stomp';
 import ApiService from './service/ApiService';
-import mockUser from './data/MockUser';
+import {mockUser} from './data/MockUser';
 
 const SOCKET_URL = 'http://localhost:8080/client'
 
@@ -48,6 +48,8 @@ function App() {
     // treba da se prati do bazata deka userot
     // dobil nov interest
     // axios createUserInterest
+    e.preventDefault();
+
     setAddNew(false);
   }
 
