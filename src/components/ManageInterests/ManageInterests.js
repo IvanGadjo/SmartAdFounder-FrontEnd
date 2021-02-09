@@ -1,7 +1,7 @@
-const ManageInterests = ({editInterest, deleteInterest, addNew, user}) => {    
+const ManageInterests = ({editInterest, deleteInterest, addInterest, user}) => {    
     return(
         <div>
-        {user.UserInterest.map(int => 
+        {user.userInterests.map(int => 
         <div className="pa3 pa5-ns" key={int.id}>
             <h4 className="f6 fw6">UserInterest</h4>
             <dl className="f6 lh-title mv2">

@@ -1,13 +1,13 @@
 export const mockUser = {
-    Name: 'John',
-    Surname: 'Smith',
-    UserInterest: [
+    name: 'John',
+    surname: 'Smith',
+    userInterests: [
         {
             id: 1,
             keywords: 'Opel',
             category: 'Cars',
             region: 'Skopje',
-            foundAd: 'url goes here',
+            foundAdverts: ['url goes here'],
             active: true,
         },
         {
@@ -15,7 +15,7 @@ export const mockUser = {
             keywords: 'Iphone 6',
             category: 'Mobile Phones',
             region: 'All',
-            foundAd: 'url goes here',
+            foundAdverts: ['url goes here'],
             active: true
         },
         {
@@ -23,7 +23,7 @@ export const mockUser = {
             keywords: 'Casio',
             category: 'Watch',
             region: 'Prilep',
-            foundAd: 'url goes here',
+            foundAdverts: ['url goes here'],
             active: true
         },
         {
@@ -31,7 +31,7 @@ export const mockUser = {
             keywords: 'Bmw X5',
             category: 'Cars',
             region: 'Kumanovo',
-            foundAd: 'url goes here',
+            foundAdverts: ['url goes here'],
             active: true
         },
         {
@@ -39,7 +39,7 @@ export const mockUser = {
             keywords: 'Burton board',
             category: 'Winter',
             region: 'Mavrovo',
-            foundAd: 'url goes here',
+            foundAdverts: ['url goes here'],
             active: true
         }
     ]

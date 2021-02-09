@@ -22,14 +22,16 @@ function App() {
   }
 
   const onMessageReceived = (msg) => {
-    //this.setState({foundAdvert: msg});
     setFoundAd(msg);
-    setUserInterest({...userInterest, foundAdverts: push(msg)});
+    user.userInterests.map(userInt => {
+       if(foundAd.id === userInt.id) {
+       setUser({...user, userInterests: userInt.foundAdverts.push(msg)}) 
+      }}
+      );
     console.log("Message Received", msg);
   }
 
   const onSubmit = (e) => {
-    
     // ovde treba da se submitne nov userInterest
     // da se dodade vo listata i da se prenasoci 
     // userot na ManageInterest komponentata
@@ -55,28 +57,11 @@ function App() {
       setAddNew(true);
   }
 
-  // onSearchInput = (event) => {
-  //   this.setState({searchInput: event.target.value});
-  //   console.log(event.target.value);
-  // }
-
-  // onCatSelect = (event) => {
-  //   this.setState({catSelect: event.target.value});
-  //   console.log(event.target.value);
-  // }
-
-  // onRegionSelect = (event) => {
-  //   this.setState({regionSelect: event.target.value});
-  //   console.log(event.target.value);
-  // }
-
   const handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    // this.setState({
-    //   [name] : value
-    // })
+    
     setUserInterest({...userInterest, [name] : value})
     console.log(userInterest)
 
@@ -90,7 +75,7 @@ function App() {
   
   return (
     <div className="App">
-      (addNew) ?
+      {(addNew) ?
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}
@@ -98,9 +83,9 @@ function App() {
       <ManageInterests
         editInterest={editInterest}
         deleteInterest={deleteInterest}
-        addNew = {addNew}
-        user = {user}
-      />
+        addInterest={addInterest}
+        user={user}
+      />}
       {/* <SockJsClient 
         url={SOCKET_URL}
         topics={['/topic/group']}
