@@ -79,12 +79,20 @@ function App() {
 
   // tuka useEffect
   useEffect(() => {
+
+    console.log('--USE_EFFECT--')
+
     const demoUser = {
       email: 'demoEmail@gmail.com',
       id: '123'
     }
 
-    
+    ApiService.createUser(demoUser).then(resp => {
+      console.log(resp);
+    }).catch(err => {
+      console.log(err);
+    })
+
   })
 
   

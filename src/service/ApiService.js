@@ -11,11 +11,14 @@ const ApiService = {
     },
 
     createUser : (user) => {
-        Axios.post("/api/users/createUser", {
-             body: user
+        console.log()
+        return Axios.post("/api/users/createUser", {
+            //  body: user
+            id: user.id,
+            userEmail: user.email
         })
-        .then(res => res.data())
-        .catch(err => console.log(err));
+        // .then(res => res.data())
+        // .catch(err => console.log(err));
     },
 
     createUserInterest : (userInterest, userId) => {
