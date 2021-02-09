@@ -7,6 +7,7 @@ import ApiService from './service/ApiService';
 import {mockUser} from './data/MockUser';
 import ManageInterests from './components/ManageInterests/ManageInterests';
 
+
 const SOCKET_URL = 'http://localhost:8080/client'
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
     // treba da se prati do bazata deka userot
     // dobil nov interest
     // axios createUserInterest
+    e.preventDefault();
+
     setAddNew(false);
   }
 
