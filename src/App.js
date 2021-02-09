@@ -32,15 +32,10 @@ function App() {
   }
 
   const onSubmit = (e) => {
-    // ovde treba da se submitne nov userInterest
-    // da se dodade vo listata i da se prenasoci 
-    // userot na ManageInterest komponentata
-    // treba da se prati do bazata deka userot
-    // dobil nov interest
-    // axios createUserInterest
     e.preventDefault();
-
     setAddNew(false);
+    setUser({...user, userInterests: userInterests.push(userInterest)})
+    ApiService.createUserInterest(userInterest, user.id);
   }
 
   
