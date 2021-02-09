@@ -77,9 +77,35 @@ function App() {
   // chrome.identity.getProfileUserInfo((userInfo) => {
   //   console.log('User Info: ');
   //   console.log(userInfo)
+<<<<<<< HEAD
+=======
+  // });
+>>>>>>> 11e5e6448472b8a107735bf88e269f7ef2909ad0
 
+  // Ova samo zaradi testiranje so npm start
 
+  // tuka useEffect
+  useEffect(() => {
+
+    console.log('--USE_EFFECT--')
+
+    const demoUser = {
+      email: 'demoEmail@gmail.com',
+      id: '123'
+    }
+
+    ApiService.createUser(demoUser).then(resp => {
+      console.log(resp);
+    }).catch(err => {
+      console.log(err);
+    })
+
+  })
+
+<<<<<<< HEAD
 //});
+=======
+>>>>>>> 11e5e6448472b8a107735bf88e269f7ef2909ad0
   
   return (
     <div className="App">
