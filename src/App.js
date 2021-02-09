@@ -33,14 +33,14 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setAddNew(false);
-    setUser({...user, userInterests: userInterests.push(userInterest)})
-    ApiService.createUserInterest(userInterest, user.id);
+    // setAddNew(false);
+    // setUser({...user, userInterests: userInterests.push(userInterest)})
+    // ApiService.createUserInterest(userInterest, user.id);
   }
 
   
   const editInterest = () => {
-    
+
     // axios editUserInterest
   }
 
