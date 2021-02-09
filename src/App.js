@@ -63,19 +63,30 @@ function App() {
 
   }
 
-  chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    // Use the token.
-    // console.log('Jas sum!')
-    // console.log(token);
+  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  //   // Use the token.
+  //   // console.log('Jas sum!')
+  //   // console.log(token);
     
-  });
+  // });
 
-  chrome.identity.getProfileUserInfo((userInfo) => {
-    console.log('User Info: ');
-    console.log(userInfo)
+  // chrome.identity.getProfileUserInfo((userInfo) => {
+  //   console.log('User Info: ');
+  //   console.log(userInfo)
+  // });
 
+  // Ova samo zaradi testiranje so npm start
 
-});
+  // tuka useEffect
+  useEffect(() => {
+    const demoUser = {
+      email: 'demoEmail@gmail.com',
+      id: '123'
+    }
+
+    
+  })
+
   
   return (
     <div className="App">
