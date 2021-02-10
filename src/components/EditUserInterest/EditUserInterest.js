@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditUserInterest = () => {
+const EditUserInterest = ({ editedUserInterest, handleInputChange, submitEdit }) => {
     
     return(
         <div>
@@ -8,10 +8,10 @@ const EditUserInterest = () => {
                 <div>
                     <label htmlFor="keyword" className="f6 b db mb2">Search</label>
                     <textarea id="keyword" name="keywords" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="keyword-desc"
-                    onChange={handleInputChange}></textarea>
+                    value={editedUserInterest[0]} onChange={handleInputChange}></textarea>
                 </div>
                 <div className="box">
-                    <select name="category" id="category" required onChange={handleInputChange}>
+                    <select name="category" id="category" value={editedUserInterest[1]} required onChange={handleInputChange}>
                         <option value="">Изберете категорија</option>
                         <option value="Avtomobili">Автомобили</option>
                         <option value="Kukji/Vili">Куќи/Вили</option>
@@ -22,7 +22,7 @@ const EditUserInterest = () => {
                         <option value="">Останато</option>
                     </select>
                     <div className="mt3">
-                    <select name="region" id="region" required onChange={handleInputChange}>
+                    <select name="region" id="region" required value={editedUserInterest[2]} onChange={handleInputChange}>
                         <option value="">Изберете регион</option>
                         <option value="Skopje">Скопје</option>
                         <option value="Bitola">Битола</option>
@@ -57,8 +57,10 @@ const EditUserInterest = () => {
                     </select>
                     </div>
                 </div>
-                <button className="f6 link dim br-pill ba bw2 ph3 pv2 mb2 dib dark-green" onClick={onSubmit}>Button Text</button>
+                <button className="f6 link dim br-pill ba bw2 ph3 pv2 mb2 dib dark-green" onClick={submitEdit}>Button Text</button>
             </form>
         </div>
     );
 }
+
+export default EditUserInterest;

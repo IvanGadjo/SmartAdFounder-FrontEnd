@@ -13,12 +13,11 @@ const SOCKET_URL = 'http://localhost:8080/client'
 
 function App() {
 
-  const [addNew, setAddNew] = useState(false)
   const [route, setRoute] = useState('manage')
   const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
   const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
-  const [editInt, setEditInt] = useState({})
+  const [editedUserInterest, setEditedUserInterest] = useState([])
 
   const onConnected = () => {
     console.log("Connected!");
@@ -34,6 +33,10 @@ function App() {
     console.log("Message Received", msg);
   }
 
+  const submitEdit = (e) => {
+    e.preventDefault();
+  }
+
   const onSubmit = (e) => {
     console.log(userInterest)
 
@@ -47,8 +50,7 @@ function App() {
     console.log(userInterestRedefined)
 
     e.preventDefault();
-    setAddNew(false);
-    setRoute('manage')
+    setRoute('manage');
     //setUser({...user, userInterests: ['m' , 'd']})
     let user2 = {...user};
     user2.userInterests.push(userInterest);
@@ -60,7 +62,8 @@ function App() {
 
   
   const editInterest = (int) => {
-    setRoute('edit')
+    setRoute('edit');
+    setEditedUserInterest([int.keywords.mainKeyword, int.category, int.region])
     // axios editUserInterest
   }
 
@@ -79,7 +82,7 @@ function App() {
   }
 
   const addInterest = () => {
-      setRoute('add')
+      setRoute('add');
   }
 
   const handleInputChange = (event) => {
@@ -91,8 +94,6 @@ function App() {
     console.log(userInterest)
 
   }
-
-
 
 
 
@@ -137,7 +138,6 @@ function App() {
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}
-        editInt = {editInt}
       /> }
        else if(route === 'manage') {
       <ManageInterests
@@ -148,7 +148,9 @@ function App() {
       /> }
        else if(route === 'edit') {
         <EditUserInterest
-          editInterest={editInterest}
+          editedUserInterest={editedUserInterest}
+          handleInputChange={handleInputChange}
+          submitEdit={submitEdit}
         />
       }}}
       {/* <SockJsClient 
