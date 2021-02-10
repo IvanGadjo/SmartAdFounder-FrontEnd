@@ -36,6 +36,16 @@ function App() {
 
   const onSubmit = (e) => {
     console.log(userInterest)
+
+    let userInterestRedefined = {...userInterest};
+
+    userInterestRedefined.keywords = {
+      mainKeyword: userInterest.keywords,
+      otherKeywords: []
+    }
+
+    console.log(userInterestRedefined)
+
     e.preventDefault();
     setAddNew(false);
     setRoute('manage')
@@ -43,8 +53,9 @@ function App() {
     let user2 = {...user};
     user2.userInterests.push(userInterest);
     setUser(user2);
-    console.log(user);
-    ApiService.createUserInterest(userInterest, user.id);
+    // console.log(user);
+
+    ApiService.createUserInterest(userInterestRedefined, user.id);
   }
 
   
@@ -54,13 +65,16 @@ function App() {
   }
 
   const deleteInterest = (int) => {
-    let user2 = user;
-    console.log(user2)
+    let user2 = {...user};
+    // console.log(user2)
     const index = user2.userInterests.indexOf(int);
     user2.userInterests.splice(index, 1);
     console.log(user2);
-    //setUser(user2);
+    setUser(user2);
     // axios editUserInterest
+
+    int.active = false;
+    ApiService.editUserInterests(int, user.id)
     // active: false prakjam kako argument
   }
 

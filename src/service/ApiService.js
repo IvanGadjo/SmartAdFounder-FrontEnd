@@ -15,24 +15,26 @@ const ApiService = {
             id: user.id,
             userEmail: user.email
         })
-        // .then(res => res.data())
-        // .catch(err => console.log(err));
     },
 
     createUserInterest : (userInterest, userId) => {
-        Axios.post("/api/userInterests/createUserInterest", {
-            body: {userInterest, userId}
+        return Axios.post("/api/userInterests/createUserInterest", {
+            ...userInterest
+        }, {
+            params: {
+                userId
+            }
         })
-        .then(res => res.data())
-        .catch(err => console.log(err));
     },
 
     editUserInterests : (newUserInterest, userId) => {
-        Axios.patch("/api/userInterests/editUserInterest", {
-            body: {newUserInterest, userId}
+        return Axios.patch("/api/userInterests/editUserInterest", {
+            ...newUserInterest
+        }, {
+            params: {
+                userId
+            }
         })
-        .then(res => res.data)
-        .catch(err => console.log(err));
     }
 
 }
