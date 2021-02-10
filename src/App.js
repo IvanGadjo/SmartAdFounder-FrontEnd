@@ -34,14 +34,25 @@ function App() {
 
   const onSubmit = (e) => {
     console.log(userInterest)
+
+    let userInterestRedefined = {...userInterest};
+
+    userInterestRedefined.keywords = {
+      mainKeyword: userInterest.keywords,
+      otherKeywords: []
+    }
+
+    console.log(userInterestRedefined)
+
     e.preventDefault();
     setAddNew(false);
     //setUser({...user, userInterests: ['m' , 'd']})
     let user2 = {...user};
     user2.userInterests.push(userInterest);
     setUser(user2);
-    console.log(user);
-    ApiService.createUserInterest(userInterest, user.id);
+    // console.log(user);
+
+    ApiService.createUserInterest(userInterestRedefined, user.id);
   }
 
   

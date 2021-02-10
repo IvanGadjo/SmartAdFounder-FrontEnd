@@ -18,11 +18,13 @@ const ApiService = {
     },
 
     createUserInterest : (userInterest, userId) => {
-        Axios.post("/api/userInterests/createUserInterest", {
-            body: {userInterest, userId}
+        return Axios.post("/api/userInterests/createUserInterest", {
+            ...userInterest
+        }, {
+            params: {
+                userId
+            }
         })
-        .then(res => res.data())
-        .catch(err => console.log(err));
     },
 
     editUserInterests : (newUserInterest, userId) => {
