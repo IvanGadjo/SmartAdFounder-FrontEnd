@@ -1,13 +1,13 @@
 import React from 'react';
 import './AddUserInterest.css';
 
-const AddUserInterest = ({ onSubmit, handleInputChange }) => {
+const AddUserInterest = ({ onSubmit, handleInputChange, editInt }) => {
     return(
-        <div>
+        <div> {console.log(editInt)}
             <form className="pa4 black-80">
                 <div>
                     <label htmlFor="keyword" className="f6 b db mb2">Search</label>
-                    <textarea id="keyword" name="keyword" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="keyword-desc"
+                    <textarea id="keyword" name="keywords" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="keyword-desc"
                     onChange={handleInputChange}></textarea>
                 </div>
                 <div className="box">

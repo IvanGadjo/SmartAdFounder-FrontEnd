@@ -16,6 +16,7 @@ function App() {
   const [userInterest, setUserInterest] = useState({})
   const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
+  const [editInt, setEditInt] = useState({})
 
   const onConnected = () => {
     console.log("Connected!");
@@ -32,19 +33,22 @@ function App() {
   }
 
   const onSubmit = (e) => {
+    console.log(userInterest)
     e.preventDefault();
     setAddNew(false);
     //setUser({...user, userInterests: ['m' , 'd']})
     let user2 = {...user};
     user2.userInterests.push(userInterest);
     setUser(user2);
-    console.log(user)
+    console.log(user);
     ApiService.createUserInterest(userInterest, user.id);
   }
 
   
-  const editInterest = () => {
-
+  const editInterest = (keywords, region, category) => {
+    setAddNew(true)
+    setEditInt({keywords, category, region})
+    
     // axios editUserInterest
   }
 
@@ -95,7 +99,7 @@ function App() {
       console.log(err);
     })
 
-  })
+  },[])
 
   return (
     <div className="App">
@@ -103,6 +107,7 @@ function App() {
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}
+        editInt = {editInt}
       /> :
       <ManageInterests
         editInterest={editInterest}
