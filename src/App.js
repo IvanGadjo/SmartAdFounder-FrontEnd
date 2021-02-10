@@ -13,7 +13,7 @@ const SOCKET_URL = 'http://localhost:8080/client'
 function App() {
 
   const [addNew, setAddNew] = useState(false)
-  const [userInterest, setUserInterest] = useState({})
+  const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
   const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
   const [editInt, setEditInt] = useState({})
@@ -69,6 +69,10 @@ function App() {
 
   }
 
+
+
+
+
   // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
   //   // Use the token.
   //   // console.log('Jas sum!')
@@ -88,16 +92,21 @@ function App() {
 
     const demoUser = {
       email: 'demoEmail@gmail.com',
-      id: '123'
+      id: '7'
     }
 
     ApiService.createUser(demoUser).then(resp => {
       console.log(resp);
+      setUser(resp.data)
+
     }).catch(err => {
       console.log(err);
     })
 
   },[])
+
+
+
 
   return (
     <div className="App">

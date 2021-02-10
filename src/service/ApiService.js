@@ -12,7 +12,6 @@ const ApiService = {
     createUser : (user) => {
         console.log()
         return Axios.post("/api/users/createUser", {
-            //  body: user
             id: user.id,
             userEmail: user.email
         })

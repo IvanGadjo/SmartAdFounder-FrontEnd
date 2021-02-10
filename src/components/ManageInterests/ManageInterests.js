@@ -5,8 +5,14 @@ const ManageInterests = ({editInterest, deleteInterest, addInterest, user}) => {
         <div className="pa3 pa5-ns" key={int.id}>
             <h4 className="f6 fw6">UserInterest</h4>
             <dl className="f6 lh-title mv2">
-                <dt className="dib b">Keywords:</dt>
-                <dd className="dib ml0 gray">{int.keywords}</dd>
+                <dt className="dib b">Main keyword:</dt>
+                <dd className="dib ml0 gray">{int.keywords.mainKeyword}</dd>
+            </dl>
+            <dl className="f6 lh-title mv2">
+                <dt className="dib b">Other keywords:</dt>
+                {int.keywords.otherKeywords.map(othKyw => {
+                    <dd className="dib ml0 gray">{othKyw},</dd>
+                })}
             </dl>
             <dl className="f6 lh-title mv2">
                 <dt className="dib b">Cat:</dt>
