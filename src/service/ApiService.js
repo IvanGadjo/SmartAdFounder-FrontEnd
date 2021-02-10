@@ -15,8 +15,6 @@ const ApiService = {
             id: user.id,
             userEmail: user.email
         })
-        // .then(res => res.data())
-        // .catch(err => console.log(err));
     },
 
     createUserInterest : (userInterest, userId) => {
@@ -28,11 +26,13 @@ const ApiService = {
     },
 
     editUserInterests : (newUserInterest, userId) => {
-        Axios.patch("/api/userInterests/editUserInterest", {
-            body: {newUserInterest, userId}
+        return Axios.patch("/api/userInterests/editUserInterest", {
+            ...newUserInterest
+        }, {
+            params: {
+                userId
+            }
         })
-        .then(res => res.data)
-        .catch(err => console.log(err));
     }
 
 }

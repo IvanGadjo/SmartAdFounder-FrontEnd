@@ -51,13 +51,16 @@ function App() {
   }
 
   const deleteInterest = (int) => {
-    let user2 = user;
-    console.log(user2)
+    let user2 = {...user};
+    // console.log(user2)
     const index = user2.userInterests.indexOf(int);
     user2.userInterests.splice(index, 1);
     console.log(user2);
-    //setUser(user2);
+    setUser(user2);
     // axios editUserInterest
+
+    int.active = false;
+    ApiService.editUserInterests(int, user.id)
     // active: false prakjam kako argument
   }
 
