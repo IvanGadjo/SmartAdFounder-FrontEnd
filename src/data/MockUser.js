@@ -39,7 +39,7 @@ export const mockUser = {
             keywords: 'Burton board',
             category: 'Winter',
             region: 'Mavrovo',
-            foundAdverts: ['url goes here'],
+            foundAdverts: ['url goes here', 'yessir'],
             active: true
         }
     ]

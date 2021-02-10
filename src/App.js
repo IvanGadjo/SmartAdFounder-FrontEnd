@@ -45,10 +45,8 @@ function App() {
   }
 
   
-  const editInterest = (keywords, region, category) => {
-    setAddNew(true)
-    setEditInt({keywords, category, region})
-    
+  const editInterest = () => {
+    //setAddNew(true)    
     // axios editUserInterest
   }
 
@@ -103,7 +101,7 @@ function App() {
 
   return (
     <div className="App">
-      {(addNew) ?
+      { addNew ?
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}

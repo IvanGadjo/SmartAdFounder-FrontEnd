@@ -18,9 +18,10 @@ const ManageInterests = ({editInterest, deleteInterest, addInterest, user}) => {
             </dl>
             <dl className="f6 lh-title mv2">
                 <dt className="dib b">Ads:</dt>
-                <dd className="dib ml0 gray">{int.foundAd}</dd>
+                {int.foundAdverts.map(advert =>  <dd className="dib ml0 gray">{advert},</dd>)}
+                {/* <dd className="dib ml0 gray">{int.foundAdverts}</dd> */}
             </dl>
-            <button className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" onClick={editInterest(int.keywords, int.category, int.region)} >Edit</button>
+            <button className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" onClick={editInterest()} >Edit</button>
             <button className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black" >Delete</button>
         </div>
         )}

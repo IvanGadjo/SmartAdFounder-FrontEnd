@@ -1,9 +1,9 @@
 import React from 'react';
 import './AddUserInterest.css';
 
-const AddUserInterest = ({ onSubmit, handleInputChange, editInt }) => {
+const AddUserInterest = ({ onSubmit, handleInputChange}) => {
     return(
-        <div> {console.log(editInt)}
+        <div>
             <form className="pa4 black-80">
                 <div>
                     <label htmlFor="keyword" className="f6 b db mb2">Search</label>
