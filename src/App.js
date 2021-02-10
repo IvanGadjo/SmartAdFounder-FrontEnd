@@ -45,12 +45,18 @@ function App() {
   }
 
   
-  const editInterest = () => {
+  const editInterest = (int) => {
     //setAddNew(true)    
     // axios editUserInterest
   }
 
-  const deleteInterest = () => {
+  const deleteInterest = (int) => {
+    let user2 = user;
+    console.log(user2)
+    const index = user2.userInterests.indexOf(int);
+    user2.userInterests.splice(index, 1);
+    console.log(user2);
+    //setUser(user2);
     // axios editUserInterest
     // active: false prakjam kako argument
   }
