@@ -6,6 +6,7 @@ import SockJsClient from 'react-stomp';
 import ApiService from './service/ApiService';
 import {mockUser} from './data/MockUser';
 import ManageInterests from './components/ManageInterests/ManageInterests';
+import EditUserInterest from './components/EditUserInterest/EditUserInterest'
 
 
 const SOCKET_URL = 'http://localhost:8080/client'
@@ -13,6 +14,7 @@ const SOCKET_URL = 'http://localhost:8080/client'
 function App() {
 
   const [addNew, setAddNew] = useState(false)
+  const [route, setRoute] = useState('manage')
   const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
   const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
@@ -36,6 +38,7 @@ function App() {
     console.log(userInterest)
     e.preventDefault();
     setAddNew(false);
+    setRoute('manage')
     //setUser({...user, userInterests: ['m' , 'd']})
     let user2 = {...user};
     user2.userInterests.push(userInterest);
@@ -46,7 +49,7 @@ function App() {
 
   
   const editInterest = (int) => {
-    //setAddNew(true)    
+    setRoute('edit')
     // axios editUserInterest
   }
 
@@ -62,7 +65,7 @@ function App() {
   }
 
   const addInterest = () => {
-      setAddNew(true);
+      setRoute('add')
   }
 
   const handleInputChange = (event) => {
@@ -116,18 +119,24 @@ function App() {
 
   return (
     <div className="App">
-      { addNew ?
+      { () => {if(route === 'add') {
       <AddUserInterest
         onSubmit={onSubmit} 
         handleInputChange={handleInputChange}
         editInt = {editInt}
-      /> :
+      /> }
+       else if(route === 'manage') {
       <ManageInterests
         editInterest={editInterest}
         deleteInterest={deleteInterest}
         addInterest={addInterest}
         user={user}
-      />}
+      /> }
+       else if(route === 'edit') {
+        <EditUserInterest
+          editInterest={editInterest}
+        />
+      }}}
       {/* <SockJsClient 
         url={SOCKET_URL}
         topics={['/topic/group']}
