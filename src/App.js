@@ -9,32 +9,42 @@ import ManageInterests from './components/ManageInterests/ManageInterests';
 import EditUserInterest from './components/EditUserInterest/EditUserInterest'
 
 
-const SOCKET_URL = 'http://localhost:8080/client'
+const SOCKET_URL = 'http://localhost:8080/kafka-chat'
 
 function App() {
 
   const [route, setRoute] = useState('manage')
   const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
   const [editedUserInterest, setEditedUserInterest] = useState([])
 
   // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
   //   // Use the token.
   //   // console.log('Jas sum!')
-  //   // console.log(token);
-    
+  //   // console.log(token);  
   // });
+
+
+  // ovaa funkcija bi se koristela posle build na chrome extensionot, go zema mailot od google acc
+  // koj e logiran vo browser
 
   // chrome.identity.getProfileUserInfo((userInfo) => {
   //   console.log('User Info: ');
   //   console.log(userInfo)
-  // Ova samo zaradi testiranje so npm start
+  //   ApiService.createUser(userInfo).then(resp => {
+  //     setUser(resp.data)
+
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })
+  // }
+
+
+
 
   // useEffect - demo user mesto rabota so chrome identity
   useEffect(() => {
-
-    console.log('--USE_EFFECT--')
 
     const demoUser = {
       email: 'demoEmail@gmail.com',
@@ -42,7 +52,6 @@ function App() {
     }
 
     ApiService.createUser(demoUser).then(resp => {
-      console.log(resp);
       setUser(resp.data)
 
     }).catch(err => {
@@ -57,14 +66,29 @@ function App() {
 
   const onMessageReceived = (msg) => {
     console.log("Message Received", msg);
+
+    msg.url = msg.adUrl   // ova go pravime poso od backend preku websocket se vrakja KafkaFoundAdMessage, a ne samo FoundAdvert
+
     setFoundAd(msg);
     let user2 = {...user}
 
     user2.userInterests.map(userInt => {
-       if(foundAd.id === userInt.id) {   
-          userInt.foundAdverts.push(msg);
-    }});
+
+      // console.log(userInt.keywords.mainKeyword)
+      // foundAd.id e sekogas null, treba da e vaka:
+      console.log(foundAd.userInterestId, userInt.id)
+
+      if(foundAd.id === userInt.id) {   
+        userInt.foundAdverts.push(foundAd);
+      } else {
+        
+      }
+    });
+
+
     setUser(user2);
+
+    console.log(user2);
   }
 
   const submitEdit = (e) => {
@@ -102,8 +126,6 @@ function App() {
     }
 
 
-    console.log(finalUserInterest)
-
     ApiService.editUserInterests(finalUserInterest, user.id)
 
 
@@ -111,26 +133,27 @@ function App() {
   }
 
   const onSubmit = (e) => {
-    console.log(userInterest)
 
     let userInterestRedefined = {...userInterest};
+
+    // dopolnuva user interest
+    userInterestRedefined.active = true;
 
     userInterestRedefined.keywords = {
       mainKeyword: userInterest.keywords,
       otherKeywords: []
     }
 
-    console.log(userInterestRedefined)
 
     e.preventDefault();
     setRoute('manage');
-    //setUser({...user, userInterests: ['m' , 'd']})
 
     // samo radi render
-    let user2 = {...user};
-    user2.userInterests.push(userInterest);
+    const user2 = {...user};
+    userInterestRedefined.foundAdverts = [];
+    user2.userInterests.push(userInterestRedefined);
     setUser(user2);
-    // console.log(user);
+    // console.log('CREATED USER INT, USER: ', user);
 
     ApiService.createUserInterest(userInterestRedefined, user.id);
   }
@@ -138,7 +161,6 @@ function App() {
   
   const editInterest = (int) => {
     setRoute('edit');
-    console.log(int)
     setUserInterest({
       keywords: int.keywords.mainKeyword,
       category: int.category,
@@ -150,16 +172,12 @@ function App() {
 
   const deleteInterest = (int) => {
     let user2 = {...user};
-    // console.log(user2)
     const index = user2.userInterests.indexOf(int);
     user2.userInterests.splice(index, 1);
-    console.log(user2);
     setUser(user2);
-    // axios editUserInterest
 
     int.active = false;
     ApiService.editUserInterests(int, user.id)
-    // active: false prakjam kako argument
   }
 
   const addInterest = () => {
@@ -172,12 +190,21 @@ function App() {
     const name = target.name;
     
     setUserInterest({...userInterest, [name] : value})
-    console.log(userInterest)
 
   }
 
   return (
     <div className="App">
+
+
+      <SockJsClient 
+        url={SOCKET_URL}
+        topics={['/topic/group']}
+        onConnect={onConnected} 
+        onDisconnect={console.log("Disconnected")} 
+        onMessage={msg => onMessageReceived(msg)}
+        debug={false}
+      />
 
       { 
         (route === 'add') ?
@@ -186,29 +213,24 @@ function App() {
             handleInputChange={handleInputChange}
           /> 
         : (
-        route === 'manage' ?
-          <ManageInterests
-            editInterest={editInterest}
-            deleteInterest={deleteInterest}
-            addInterest={addInterest}
-            user={user}
-        /> 
-        : 
-        <EditUserInterest
-          editedUserInterest={editedUserInterest}
-          handleInputChange={handleInputChange}
-          submitEdit={submitEdit}
-        />        
+          route === 'manage' ?
+            <ManageInterests
+              editInterest={editInterest}
+              deleteInterest={deleteInterest}
+              addInterest={addInterest}
+              user={user}
+          /> 
+          : 
+          <EditUserInterest
+            editedUserInterest={editedUserInterest}
+            handleInputChange={handleInputChange}
+            submitEdit={submitEdit}
+          />        
         )       
-        }
-      {/* <SockJsClient 
-        url={SOCKET_URL}
-        topics={['/topic/group']}
-        onConnect={onConnected} 
-        onDisconnect={console.log("Disconnected")} 
-        onMessage={msg => onMessageReceived(msg)}
-        debug={false}
-      /> */}
+      }
+
+
+      
     
 
     </div>

@@ -5,13 +5,10 @@ const ApiService = {
 
     // unused
      getUserInterests : (userId) => {
-        Axios.get(`/api/userInterests/all/byUser/${userId}`)
-        .then(res => res.data())
-        .catch(err => console.log(err));
+        return Axios.get(`/api/userInterests/all/byUser/${userId}`)
     },
 
     createUser : (user) => {
-        console.log()
         return Axios.post("/api/users/createUser", {
             id: user.id,
             userEmail: user.email
