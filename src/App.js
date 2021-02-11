@@ -15,14 +15,9 @@ function App() {
 
   const [route, setRoute] = useState('manage')
   const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
-  const [user, setUser] = useState(mockUser)
+  const [user, setUser] = useState({})
   const [foundAd, setFoundAd] = useState({})
   const [editedUserInterest, setEditedUserInterest] = useState([])
-
-  const onConnected = () => {
-    console.log("Connected!");
-  }
-
 
   // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
   //   // Use the token.
@@ -56,18 +51,20 @@ function App() {
 
   },[])
 
-
-
-
+  const onConnected = () => {
+    console.log("Connected!");
+  }
 
   const onMessageReceived = (msg) => {
-    setFoundAd(msg);
-    user.userInterests.map(userInt => {
-       if(foundAd.id === userInt.id) { 
-       //setUser({...user, userInterests: userInt.foundAdverts.push(msg)}) 
-      }}
-      );
     console.log("Message Received", msg);
+    setFoundAd(msg);
+    let user2 = {...user}
+
+    user2.userInterests.map(userInt => {
+       if(foundAd.id === userInt.id) {   
+          userInt.foundAdverts.push(msg);
+    }});
+    setUser(user2);
   }
 
   const submitEdit = (e) => {
@@ -148,8 +145,6 @@ function App() {
       region: int.region
     })
     setEditedUserInterest([int.keywords.mainKeyword, int.category, int.region, int.id])
-    // axios editUserInterest
-
     
   }
 
@@ -181,10 +176,6 @@ function App() {
 
   }
 
-
-
-
-
   return (
     <div className="App">
 
@@ -207,18 +198,9 @@ function App() {
           editedUserInterest={editedUserInterest}
           handleInputChange={handleInputChange}
           submitEdit={submitEdit}
-        />
-          
-        )
-        
+        />        
+        )       
         }
-
-
-
-
-
-
-
       {/* <SockJsClient 
         url={SOCKET_URL}
         topics={['/topic/group']}

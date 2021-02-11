@@ -57,7 +57,7 @@ const EditUserInterest = ({ editedUserInterest, handleInputChange, submitEdit })
                     </select>
                     </div>
                 </div>
-                <button className="f6 link dim br-pill ba bw2 ph3 pv2 mb2 dib dark-green" onClick={submitEdit}>Button Text</button>
+                <button className="f6 link dim br-pill ba bw2 ph3 pv2 mb2 dib dark-green" onClick={submitEdit}>Edit</button>
             </form>
         </div>
     );
