@@ -23,6 +23,43 @@ function App() {
     console.log("Connected!");
   }
 
+
+  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  //   // Use the token.
+  //   // console.log('Jas sum!')
+  //   // console.log(token);
+    
+  // });
+
+  // chrome.identity.getProfileUserInfo((userInfo) => {
+  //   console.log('User Info: ');
+  //   console.log(userInfo)
+  // Ova samo zaradi testiranje so npm start
+
+  // useEffect - demo user mesto rabota so chrome identity
+  useEffect(() => {
+
+    console.log('--USE_EFFECT--')
+
+    const demoUser = {
+      email: 'demoEmail@gmail.com',
+      id: '7'
+    }
+
+    ApiService.createUser(demoUser).then(resp => {
+      console.log(resp);
+      setUser(resp.data)
+
+    }).catch(err => {
+      console.log(err);
+    })
+
+  },[])
+
+
+
+
+
   const onMessageReceived = (msg) => {
     setFoundAd(msg);
     user.userInterests.map(userInt => {
@@ -144,39 +181,6 @@ function App() {
 
   }
 
-
-
-  // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-  //   // Use the token.
-  //   // console.log('Jas sum!')
-  //   // console.log(token);
-    
-  // });
-
-  // chrome.identity.getProfileUserInfo((userInfo) => {
-  //   console.log('User Info: ');
-  //   console.log(userInfo)
-  // Ova samo zaradi testiranje so npm start
-
-  // tuka useEffect
-  useEffect(() => {
-
-    console.log('--USE_EFFECT--')
-
-    const demoUser = {
-      email: 'demoEmail@gmail.com',
-      id: '7'
-    }
-
-    ApiService.createUser(demoUser).then(resp => {
-      console.log(resp);
-      setUser(resp.data)
-
-    }).catch(err => {
-      console.log(err);
-    })
-
-  },[])
 
 
 
