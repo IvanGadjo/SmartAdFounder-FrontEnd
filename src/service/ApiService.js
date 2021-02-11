@@ -3,6 +3,7 @@ import Axios from '../axios/axios_app';
 
 const ApiService = {
 
+    // unused
      getUserInterests : (userId) => {
         Axios.get(`/api/userInterests/all/byUser/${userId}`)
         .then(res => res.data())

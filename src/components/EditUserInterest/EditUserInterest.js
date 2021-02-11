@@ -8,10 +8,10 @@ const EditUserInterest = ({ editedUserInterest, handleInputChange, submitEdit })
                 <div>
                     <label htmlFor="keyword" className="f6 b db mb2">Search</label>
                     <textarea id="keyword" name="keywords" className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2" aria-describedby="keyword-desc"
-                    value={editedUserInterest[0]} onChange={handleInputChange}></textarea>
+                    defaultValue={editedUserInterest[0]} onChange={handleInputChange}></textarea>
                 </div>
                 <div className="box">
-                    <select name="category" id="category" value={editedUserInterest[1]} required onChange={handleInputChange}>
+                    <select name="category" id="category" defaultValue={editedUserInterest[1]} required onChange={handleInputChange}>
                         <option value="">Изберете категорија</option>
                         <option value="Avtomobili">Автомобили</option>
                         <option value="Kukji/Vili">Куќи/Вили</option>
@@ -22,7 +22,7 @@ const EditUserInterest = ({ editedUserInterest, handleInputChange, submitEdit })
                         <option value="">Останато</option>
                     </select>
                     <div className="mt3">
-                    <select name="region" id="region" required value={editedUserInterest[2]} onChange={handleInputChange}>
+                    <select name="region" id="region" required defaultValue={editedUserInterest[2]} onChange={handleInputChange}>
                         <option value="">Изберете регион</option>
                         <option value="Skopje">Скопје</option>
                         <option value="Bitola">Битола</option>

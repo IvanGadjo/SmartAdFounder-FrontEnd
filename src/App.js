@@ -35,6 +35,45 @@ function App() {
 
   const submitEdit = (e) => {
     e.preventDefault();
+
+    let user2 = {...user};
+
+    let id = editedUserInterest[3];
+
+    let userIntId = null;
+
+    user2.userInterests.map(ui => {
+      if(ui.id === id){
+        userIntId = ui.id;
+        ui.keywords.mainKeyword = userInterest.keywords;
+        ui.region = userInterest.region;
+        ui.category = userInterest.category;
+      } 
+    });
+
+    setUser(user2);
+
+
+
+    let finalUserInterest = {...userInterest};
+    
+    finalUserInterest.id = userIntId;
+    finalUserInterest.active = true;
+
+    finalUserInterest.keywords = {
+    
+        mainKeyword: userInterest.keywords,
+        otherKeywords: []  
+      
+    }
+
+
+    console.log(finalUserInterest)
+
+    ApiService.editUserInterests(finalUserInterest, user.id)
+
+
+    setRoute('manage');
   }
 
   const onSubmit = (e) => {
@@ -52,6 +91,8 @@ function App() {
     e.preventDefault();
     setRoute('manage');
     //setUser({...user, userInterests: ['m' , 'd']})
+
+    // samo radi render
     let user2 = {...user};
     user2.userInterests.push(userInterest);
     setUser(user2);
@@ -63,8 +104,16 @@ function App() {
   
   const editInterest = (int) => {
     setRoute('edit');
-    setEditedUserInterest([int.keywords.mainKeyword, int.category, int.region])
+    console.log(int)
+    setUserInterest({
+      keywords: int.keywords.mainKeyword,
+      category: int.category,
+      region: int.region
+    })
+    setEditedUserInterest([int.keywords.mainKeyword, int.category, int.region, int.id])
     // axios editUserInterest
+
+    
   }
 
   const deleteInterest = (int) => {
@@ -134,25 +183,38 @@ function App() {
 
   return (
     <div className="App">
-      { () => {if(route === 'add') {
-      <AddUserInterest
-        onSubmit={onSubmit} 
-        handleInputChange={handleInputChange}
-      /> }
-       else if(route === 'manage') {
-      <ManageInterests
-        editInterest={editInterest}
-        deleteInterest={deleteInterest}
-        addInterest={addInterest}
-        user={user}
-      /> }
-       else if(route === 'edit') {
+
+      { 
+        (route === 'add') ?
+          <AddUserInterest
+            onSubmit={onSubmit} 
+            handleInputChange={handleInputChange}
+          /> 
+        : (
+        route === 'manage' ?
+          <ManageInterests
+            editInterest={editInterest}
+            deleteInterest={deleteInterest}
+            addInterest={addInterest}
+            user={user}
+        /> 
+        : 
         <EditUserInterest
           editedUserInterest={editedUserInterest}
           handleInputChange={handleInputChange}
           submitEdit={submitEdit}
         />
-      }}}
+          
+        )
+        
+        }
+
+
+
+
+
+
+
       {/* <SockJsClient 
         url={SOCKET_URL}
         topics={['/topic/group']}
@@ -161,6 +223,8 @@ function App() {
         onMessage={msg => onMessageReceived(msg)}
         debug={false}
       /> */}
+    
+
     </div>
   );
 }
