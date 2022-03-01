@@ -9,20 +9,29 @@ const ApiService = {
     },
 
     createUser : (user) => {
-        return Axios.post("/api/users/createUser", {
+        let resp = Axios.post("/api/users/createUser", {
             id: user.id,
             userEmail: user.email
-        })
+        });
+
+        // console.log(resp);
+        return resp;
     },
 
-    createUserInterest : (userInterest, userId) => {
-        return Axios.post("/api/userInterests/createUserInterest", {
-            ...userInterest
-        }, {
-            params: {
-                userId
-            }
-        })
+    createUserInterest : async (userInterest, userId) => {
+
+        try {
+            let resp = await Axios.post(`/api/userInterests/createUserInterest?userId=${userId}`, {
+                ...userInterest
+            })
+            
+            console.log(resp.data)
+            return resp;
+        } catch(err) {
+            console.log(err);
+            return null;
+        }
+        
     },
 
     editUserInterests : (newUserInterest, userId) => {

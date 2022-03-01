@@ -1,6 +1,7 @@
 export const mockUser = {
     name: 'John',
     surname: 'Smith',
+    id: 11,
     userInterests: [
         {
             id: 1,

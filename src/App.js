@@ -47,8 +47,8 @@ function App() {
   useEffect(() => {
 
     const demoUser = {
-      email: 'demoEmail@gmail.com',
-      id: '7'
+      email: 'demoEmail_1@gmail.com',
+      id: '8'
     }
 
     ApiService.createUser(demoUser).then(resp => {
@@ -62,6 +62,10 @@ function App() {
 
   const onConnected = () => {
     console.log("Connected!");
+  }
+
+  const onDisconnected = () => {
+    console.log('Disconnected!')
   }
 
   const onMessageReceived = (msg) => {
@@ -153,9 +157,8 @@ function App() {
     userInterestRedefined.foundAdverts = [];
     user2.userInterests.push(userInterestRedefined);
     setUser(user2);
-    // console.log('CREATED USER INT, USER: ', user);
-
-    ApiService.createUserInterest(userInterestRedefined, user.id);
+   
+    ApiService.createUserInterest(userInterestRedefined, user.id);    
   }
 
   
@@ -199,9 +202,9 @@ function App() {
 
       <SockJsClient 
         url={SOCKET_URL}
-        topics={['/topic/group']}
+        topics={['/topic/group']}     // ! MOZEBI OVA NE E VAKA ZATOA VIKA DISCONECCTED CELO VREME
         onConnect={onConnected} 
-        onDisconnect={console.log("Disconnected")} 
+        onDisconnect={onDisconnected} 
         onMessage={msg => onMessageReceived(msg)}
         debug={false}
       />
