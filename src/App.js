@@ -14,10 +14,12 @@ const SOCKET_URL = 'http://localhost:8080/kafka-chat'
 function App() {
 
   const [route, setRoute] = useState('manage')
-  const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden
+  const [userInterest, setUserInterest] = useState({})    // noviot user interest koj bi bil dodaden, se menja na handleInputChange
   const [user, setUser] = useState(mockUser)
   const [foundAd, setFoundAd] = useState({})
   const [editedUserInterest, setEditedUserInterest] = useState([])
+
+
 
   // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
   //   // Use the token.
@@ -60,16 +62,20 @@ function App() {
 
   },[])
 
+
+
+
+  // * Kafka methods
   const onConnected = () => {
-    console.log("Connected!");
+    console.log("=== Kafka Connected!");
   }
 
   const onDisconnected = () => {
-    console.log('Disconnected!')
+    console.log('=== Kafka Disconnected!')
   }
 
   const onMessageReceived = (msg) => {
-    console.log("Message Received", msg);
+    console.log("=== Kafka Message Received", msg);
 
     msg.url = msg.adUrl   // ova go pravime poso od backend preku websocket se vrakja KafkaFoundAdMessage, a ne samo FoundAdvert
 
@@ -95,7 +101,9 @@ function App() {
     console.log(user2);
   }
 
-  const submitEdit = (e) => {
+
+  // * API calls
+  const submitEdit = (e) => {   // * Submit edit
     e.preventDefault();
 
     let user2 = {...user};
@@ -136,7 +144,7 @@ function App() {
     setRoute('manage');
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => {     // * Submit add interest
 
     let userInterestRedefined = {...userInterest};
 
@@ -161,7 +169,8 @@ function App() {
     ApiService.createUserInterest(userInterestRedefined, user.id);    
   }
 
-  
+
+  // * Only for manage interests component
   const editInterest = (int) => {
     setRoute('edit');
     setUserInterest({
@@ -187,6 +196,7 @@ function App() {
       setRoute('add');
   }
 
+  // * Utility, for add & edit interest
   const handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;

@@ -1,5 +1,5 @@
 import Axios from '../axios/axios_app';
-// import Axios from 'axios';
+
 
 const ApiService = {
 
@@ -14,31 +14,29 @@ const ApiService = {
             userEmail: user.email
         });
 
-        // console.log(resp);
         return resp;
     },
 
     createUserInterest : async (userInterest, userId) => {
 
-        try {
-            let resp = await Axios.post(`/api/userInterests/createUserInterest?userId=${userId}`, {
-                ...userInterest
-            })
+        // try {
+        //     let resp = await Axios.post(`/api/userInterests/createUserInterest?userId=${userId}`, {
+        //         ...userInterest
+        //     })
             
-            console.log(resp.data)
-            return resp;
-        } catch(err) {
-            console.log(err);
-            return null;
-        }
-        
+        //     console.log(resp.data)
+        //     return resp;
+        // } catch(err) {
+        //     console.log(err);
+        //     return null;
+        // }
     },
 
     editUserInterests : (newUserInterest, userId) => {
         return Axios.patch("/api/userInterests/editUserInterest", {
             ...newUserInterest
         }, {
-            params: {
+            params: {       // ! Sig vaka ne se stava param na requestot
                 userId
             }
         })
